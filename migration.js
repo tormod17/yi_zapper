@@ -65,9 +65,13 @@ function getDEPNames(deps, id) {
 function returnCampRulesIdName(camp) {
   return camp.map(c => {
     const rules = c.collections.map(c => c.targetRulesExpression);
+    const elements = c.collections.map(col => {
+      return col.components.map(c => c.settings.overlayElements);
+    });
     return {
       name: c.name,
-      rules: rules,
+      rules,
+      elements,
       id: c.id
     };
   });
@@ -105,7 +109,7 @@ function pageElementTable(json) {
       {
         data: "depNames",
         type: "text",
-        width: 400
+        width: 300
       },
       {
         data: "id",
@@ -114,7 +118,7 @@ function pageElementTable(json) {
       {
         data: "name",
         type: "text",
-        width: 400
+        width: 300
       },
       {
         data: "pageTypeName",
@@ -134,7 +138,7 @@ function pageElementTable(json) {
     colHeaders: [
       "campaignIds",
       "depNames",
-      "id",
+      "pageElementId",
       "name",
       "pageTypeName",
       "dataType",
