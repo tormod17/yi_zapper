@@ -1,10 +1,10 @@
 (function(){
   if (window.hasRun) {
-    return console.log('yi-zapper has already srun content script');
+    return console.log('yi-zapper has already run content script');
+  } else {
+    window.hasRun = true;
+    console.log(window.hasRun, "yi-zapper  content has run");
   }
-
-  window.hasRun = true;
-  console.log(window.hasRun, 'content has run');
 
 
   function setCookie(name,value,days) {   
@@ -33,40 +33,42 @@
   }
 
   function delete_cookie( name ) {
-    var domain = (function(){
-       var i=0;
-       var domain=document.domain;
-       var domainParts = domain.split('.');
-       var s = '_gd'+(new Date()).getTime();
-       var cookieNotSet = function(s) { return document.cookie.indexOf(s+'='+s) == -1 }
+    // var domain = (function(){
+    //    var i=0;
+    //    var domain=document.domain;
+    //    var domainParts = domain.split('.');
+    //    var s = '_gd'+(new Date()).getTime();
+    //    var cookieNotSet = function(s) { return document.cookie.indexOf(s+'='+s) == -1 }
        
-       while(i < (domainParts.length-1) && cookieNotSet(s)){
-          domain = domainParts.slice(-1-(++i)).join('.'); // remove a part
-          document.cookie = s+"="+s+";domain="+domain+";"; // set temp cookies
-       }
-       document.cookie = s+"=;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain="+domain+";";
-       return domain;
-    })();
+    //    while(i < (domainParts.length-1) && cookieNotSet(s)){
+    //       domain = domainParts.slice(-1-(++i)).join('.'); // remove a part
+    //       document.cookie = s+"="+s+";domain="+domain+";"; // set temp cookies
+    //    }
+    //    document.cookie = s+"=;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain="+domain+";";
+    //    return domain;
+    // })();
     document.cookie = 
-       name + "=;expires=Thu, 01 Jan 1970 00:00:01 GMT; domain=" + domain +";";
+       name + "=;expires=Thu, 01 Jan 1970 00:00:01 GMT;" // domain=" + domain +";";
   }
 
   function listenToPopupMessages(message){
     if (message.env === 'localEnv') {
-      window.location.hash = 'yiwildfire=local&yiheatmap=false';
+      window.location.hash = 'yidebug=true&yiwildfire=local&yiheatmap=false';
 
     }
     if (message.env === 'testEnv') {    
-      window.location.hash = 'yiwildfire=test&yiheatmap=false'; 
+      window.location.hash =
+        "yidebug=true&yiwildfire=test&yiheatmap=false"; 
     }
 
     if (message.env === 'disableHeatmap') {
-      window.location.hash = 'yiheatmap=false'; 
+      window.location.hash = "yidebug&yiheatmap=false"; 
     }
 
     if (message.env === 'removeWildfireCookies') {
       delete_cookie('_yi_heatmap_disabled');
       delete_cookie('_yi_wildfire_environment');
+      delete_cookie('_yi_debug_mode');
       window.location.hash = '';
     }
 

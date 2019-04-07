@@ -15,11 +15,30 @@ document.body.onclick = function(e){
     "clearURL",
     "frequenceyCapping",
     "urlMatch",
-    "mappingResult"
+    "mappingResult",
+    "migration"
   ];
   const id = e.target.getAttribute('id');
   
   if (ids.includes(id)){
+    if (id === 'migration') {
+      try {
+        var data = document.querySelector('.migration textarea').value;
+        var json = JSON.parse(data);
+        chrome.tabs.create({
+          url: './migration.html',
+          active: false
+        }, (tab) => {
+          setTimeout(() => {
+            chrome.tabs.sendMessage(tab.id, json );          
+          }, 1000);
+        });
+      }
+      catch(e){
+        console.error(e, 'invalid data');
+      }
+      return
+    }
     
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
       let validUrls =[];
@@ -67,5 +86,3 @@ document.body.onclick = function(e){
     });
   }
 }
-
-

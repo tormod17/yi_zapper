@@ -11,11 +11,14 @@
     "content_scripts": [{
         "matches": ["<all_urls>"],
         "all_frames": false,
-        "js":      ["content.js"]
+        "js":      [
+            "content.js", "handsontable.js"
+        ]
     }],
     "permissions": [
         "activeTab",
         "webRequest",
         "webRequestBlocking"
-    ]
+    ],
+    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
 }

@@ -1,35 +1,45 @@
-  <!DOCTYPE html>
-  <html>
-    <head>
-      <link rel="stylesheet" href="popup.css">
-    </head>
-    <body>
-      <h2> Yi Zapper</h2>
-      <div>
-        <h4>Wildfire URL</h4>
-        <button id="localEnv">Set local env</button>
-        <button id="testEnv">Set test env</button>
-        <button id="disableHeatmap">Disable heatmap</button>
-        <button id="clearURL">clear URL</button>
-      </div>
-      <div>
-        <h4>Wildfire Cookies</h4>
-        <button id="removeWildfireCookies">Remove wildfire cookies</button>
-        <button id="frequenceyCapping">Remove frequncey capping</button>
-      </div>
-      <div>
-        <h4>URL Debugger</h4>
-        <button id="urlMatch">debug pattern</button>
-        <div class="linkPanel"></div>
-      </div>
-      <div>
-        <h4>Mapping selector</h4>
-        <input id="mappingSelector" placeholder="CSS selector" />
-        <input id="mappingRegex" placeholder="regex" />
-        <input id="mappingAttribute" placeholder="HTML attribute" />        
-        <button id="mappingResult">Get mapping result</button>
-        <div id="output"></div>
-      </div>
-    </body>
-    <script src="popup.js"></script>
-  </html>
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <h2>Yi Zapper</h2>
+    <div>
+      <h4>Wildfire URL</h4>
+      <button id="localEnv">Set local env</button>
+      <button id="testEnv">Set test env</button>
+      <button id="disableHeatmap">Disable heatmap</button>
+      <button id="clearURL">clear URL</button>
+    </div>
+    <div>
+      <h4>Wildfire Cookies</h4>
+      <button id="removeWildfireCookies">Remove wildfire cookies</button>
+      <button id="frequenceyCapping">Remove frequncey capping</button>
+    </div>
+    <!-- <div>
+      <h4>URL Debugger</h4>
+      <button id="urlMatch">debug pattern</button>
+      <div class="linkPanel"></div>
+    </div> -->
+    <div>
+      <h4>Mapping selector</h4>
+      <input id="mappingSelector" placeholder="CSS selector" />
+      <input id="mappingRegex" placeholder="regex" />
+      <input id="mappingAttribute" placeholder="HTML attribute" />
+      <button id="mappingResult">Get mapping result</button>
+      <div id="output"></div>
+    </div>
+    <div class="migration">
+      <h4>Migration Table</h4>
+      <textarea
+        placeholder="copy the iframe state and paste here"
+        rows="2"
+        cols="30"
+      >
+      </textarea>
+      <button id="migration">generate migration table</button>
+    </div>
+  </body>
+  <script src="popup.js"></script>
+</html>
